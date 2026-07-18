@@ -3,28 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css')}}">
+    <title>Result – Rock Paper Scissors</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
     <div class="result-container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div>
-                    {% for category, message in messages %}
-                        <p class="{{ category }}-msg flash-msg">{{ message }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
 
-        <div class="replay-btn">
-            <form action="{{ url_for('playagain') }}" method="POST">
-                <button type="submit" name="replay" class="play-again">Play Again</button>
-            </form>
+        <h2>Rock Paper Scissors</h2>
+
+        <p class="result-msg {{ result }}-msg">{{ message }}</p>
+
+        <div class="result-choices">
+            <div class="choice-card">
+                <span class="choice-emoji">{{ emoji[user_choise] }}</span>
+                <span class="choice-label">You</span>
+                <span class="choice-name">{{ user_choise }}</span>
+            </div>
+            <span class="result-vs">VS</span>
+            <div class="choice-card">
+                <span class="choice-emoji">{{ emoji[computer_choise] }}</span>
+                <span class="choice-label">CPU</span>
+                <span class="choice-name">{{ computer_choise }}</span>
+            </div>
         </div>
+
+        <form action="{{ url_for('playagain') }}" method="POST">
+            <button type="submit" class="play-again">🔄 Play Again</button>
+        </form>
+
     </div>
-    
 </body>
 </html>
